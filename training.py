@@ -37,5 +37,6 @@ lr = LogisticRegression()
 lr.fit(X_train, y_train)
 
 y_test_hat = lr.predict(X_test)
-
 print(accuracy_score(y_test,y_test_hat))
+
+#print(lr.predict_proba([0,0,0.34]))
