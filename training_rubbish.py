@@ -67,8 +67,8 @@ avg_tr =avg_tr/len(acc_train)
 avg_te = avg_te/len(acc_test)
 print('Average Accuracy Train:{:0.2f} Accuracy Test:{:0.2f}'.format(avg_tr,avg_te))
 
-filename = 'model_rubbish.sav'
-pickle.dump(clf_rubbish, open(filename, 'wb'))
+#filename = 'model_rubbish.sav'
+#pickle.dump(clf_rubbish, open(filename, 'wb'))
 
 # load the model from disk
 #loaded_model = pickle.load(open(filename, 'rb'))
