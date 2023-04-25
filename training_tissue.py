@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.decomposition import PCA
 from sklearn.model_selection import KFold
 import numpy as np
+import pickle
 
 corpus = list()
 target_column = list()
@@ -37,9 +38,9 @@ pca.fit(X)
 X_pca = pca.transform(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X_pca,y, test_size=0.2, stratify=y,shuffle=True)
-clf = svm.SVC()
-clf.fit(X_train, y_train)
-y_test_hat = clf.predict(X_test)
+clf_tissue = svm.LinearSVC(penalty="l1",dual=False)
+clf_tissue.fit(X_train, y_train)
+y_test_hat = clf_tissue.predict(X_test)
 
 kf = KFold(n_splits=4, shuffle=True)
 acc_train=[]
@@ -47,12 +48,12 @@ acc_test=[]
 for fold, (train_i, test_i) in enumerate(kf.split(X_pca)):
     X_train, X_test = X_pca[train_i], X_pca[test_i]
     y_train, y_test = y[train_i], y[test_i]
-    clf.fit(X_train, y_train)
-    y_hat_train = clf.predict(X_train)
+    clf_tissue.fit(X_train, y_train)
+    y_hat_train = clf_tissue.predict(X_train)
     train_acc = accuracy_score(y_train, y_hat_train)
     acc_train.append(train_acc)
     
-    y_hat_test = clf.predict(X_test)
+    y_hat_test = clf_tissue.predict(X_test)
     test_acc = accuracy_score(y_test, y_hat_test)
     acc_test.append(test_acc)
 
@@ -64,10 +65,9 @@ for tr_rec, te_rec in zip(acc_train, acc_test):
 avg_tr =avg_tr/len(acc_train)
 avg_te = avg_te/len(acc_test)
 print('Average Accuracy Train:{:0.2f} Accuracy Test:{:0.2f}'.format(avg_tr,avg_te))
-#test = TfidfVectorizer(stop_words='english').fit_transform("I needed to cry so I took out a tissue from the tissue box.")
-#df = pd.DataFrame(test.todense(), columns=vectorizor.get_feature_names_out())
-#print(df)
 
-#print(clf.predict(test_sentence))
+filename = 'model_tissue.sav'
+pickle.dump(clf_tissue, open(filename, 'wb'))
 
-#clf.sa
+# load the model from disk
+#loaded_model = pickle.load(open(filename, 'rb'))
