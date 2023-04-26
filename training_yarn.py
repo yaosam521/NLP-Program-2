@@ -13,7 +13,7 @@ import pickle
 corpus = list()
 target_column = list()
 
-f = open('./yarn.txt',mode='r')
+f = open('./yarn1.txt',mode='r')
 for line in f:
     target_column.append(1)
     corpus.append(line)

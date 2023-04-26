@@ -8,6 +8,7 @@ Find information on WSD from Lexical Semantics (slides) and Chapter 23 (textbook
 '''
 # Comment 1
 def WSD_test_rubbish(text):
+    output_file = open("./result_rubbish_yao.txt", mode='w')
     #Load the model
     model_tissue = pickle.load(open('model_rubbish.sav', 'rb'))
 
@@ -20,16 +21,17 @@ def WSD_test_rubbish(text):
     pca = PCA(n_components= 7)
     X_pca = pca.fit_transform(df)
 
-    results = list()
     #predict
     for document in X_pca:
         prediction = model_tissue.predict([document])
-        results.append(prediction)
+        output_file.write(str(prediction[0]))
+        output_file.write('\n')
 
     #print results of prediction to text file
-    return results
+    output_file.close()
 
 def WSD_test_tissue(text):
+    output_file = open("./result_tissue_yao.txt", mode='w')
     #Load the model
     model_tissue = pickle.load(open('model_tissue.sav', 'rb'))
 
@@ -42,16 +44,16 @@ def WSD_test_tissue(text):
     pca = PCA(n_components= 7)
     X_pca = pca.fit_transform(df)
 
-    results = list()
     #predict
     for document in X_pca:
         prediction = model_tissue.predict([document])
-        results.append(prediction)
+        output_file.write(str(prediction[0]))
+        output_file.write('\n')
 
-    #print results of prediction to text file
-    return results
+    output_file.close()
 
 def WSD_test_yarn(text):
+    output_file = open("./result_yarn_yao.txt", mode='w')
     #Load the model
     model_tissue = pickle.load(open('model_yarn.sav', 'rb'))
 
@@ -64,11 +66,8 @@ def WSD_test_yarn(text):
     pca = PCA(n_components= 7)
     X_pca = pca.fit_transform(df)
 
-    results = list()
     #predict
     for document in X_pca:
         prediction = model_tissue.predict([document])
-        results.append(prediction)
-
-    #print results of prediction to text file
-    return results
+        output_file.write(str(prediction[0]))
+        output_file.write('\n')
