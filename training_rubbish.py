@@ -70,5 +70,5 @@ print('Average Accuracy Train:{:0.2f} Accuracy Test:{:0.2f}'.format(avg_tr,avg_t
 #filename = 'model_rubbish.sav'
 #pickle.dump(clf_rubbish, open(filename, 'wb'))
 
-# load the model from disk
-#loaded_model = pickle.load(open(filename, 'rb'))
+#vectorizor_fname = 'rubbish_vectorizor.sav'
+#pickle.dump(vectorizor, open(vectorizor_fname, 'wb'))

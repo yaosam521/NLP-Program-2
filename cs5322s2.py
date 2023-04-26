@@ -13,7 +13,7 @@ def WSD_test_rubbish(text):
     model_tissue = pickle.load(open('model_rubbish.sav', 'rb'))
 
     #Put text into a document format
-    vectorizer = TfidfVectorizer(stop_words='english')
+    vectorizer = pickle.load(open('rubbish_vectorizor.sav','rb'))
     matrix = vectorizer.fit_transform(text)
     df = pd.DataFrame(matrix.todense(), columns=vectorizer.get_feature_names_out())
 
@@ -36,7 +36,7 @@ def WSD_test_tissue(text):
     model_tissue = pickle.load(open('model_tissue.sav', 'rb'))
 
     #Put text into a document format
-    vectorizer = TfidfVectorizer(stop_words='english')
+    vectorizer = pickle.load(open('tissue_vectorizor.sav','rb'))
     matrix = vectorizer.fit_transform(text)
     df = pd.DataFrame(matrix.todense(), columns=vectorizer.get_feature_names_out())
 
@@ -58,7 +58,7 @@ def WSD_test_yarn(text):
     model_tissue = pickle.load(open('model_yarn.sav', 'rb'))
 
     #Put text into a document format
-    vectorizer = TfidfVectorizer(stop_words='english')
+    vectorizer = pickle.load(open('yarn_vectorizor.sav','rb'))
     matrix = vectorizer.fit_transform(text)
     df = pd.DataFrame(matrix.todense(), columns=vectorizer.get_feature_names_out())
 
